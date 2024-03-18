@@ -1,6 +1,7 @@
 
 package com.mycompany.proyectoanalisisdealgoritmos;
 
+import AlgConIndependiente.ConjuntoIndependiente.Vista;
 import Java_TravellingSalesman.*;
 
 public class Menu extends javax.swing.JFrame {
@@ -22,7 +23,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Algoritmo 1");
+        jButton1.setText("Problema del Conjunto Independiente (IS)");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -96,7 +97,9 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Vista vista_frame = new Vista();
+        vista_frame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void BotonViajanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonViajanteActionPerformed
