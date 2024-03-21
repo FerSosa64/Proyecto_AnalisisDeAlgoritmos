@@ -3,6 +3,7 @@ package com.mycompany.proyectoanalisisdealgoritmos;
 
 import AlgConIndependiente.ConjuntoIndependiente.Vista;
 import Java_TravellingSalesman.*;
+import Knapsack.Knapsack_View;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -119,7 +120,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonViajanteActionPerformed
 
     private void BotonAlgoritmo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAlgoritmo3ActionPerformed
-        // TODO add your handling code here:
+        Knapsack_View knapsack = new Knapsack_View(this);
+        knapsack.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BotonAlgoritmo3ActionPerformed
 
     private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
