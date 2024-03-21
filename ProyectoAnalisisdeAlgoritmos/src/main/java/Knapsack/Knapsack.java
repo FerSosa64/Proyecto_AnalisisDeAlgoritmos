@@ -56,7 +56,7 @@ class Knapsack {
         }
         
         static int knapSackHeavy(int W, int wt[], int val[]) {
-            long start = System.currentTimeMillis();
+            long start = System.nanoTime();
             int heavy[] = new int[val.length];
             int space = W;
             for (int i = 0; i < val.length; i++) {
@@ -68,8 +68,8 @@ class Knapsack {
                     wt[heaviest(wt)] = 0;
                 }
             }
-            long time = (System.currentTimeMillis() - start);
-            System.out.println("Tiempo transcurrido: "+time);
+            long time = (System.nanoTime() - start);
+            System.out.println("Tiempo transcurrido: "+time+" en nanosegundos");
             return W - space;
         }
         
@@ -86,7 +86,7 @@ class Knapsack {
         }
         
         static int knapSackLight(int W, int wt[], int val[]) {
-            long start = System.currentTimeMillis();
+            long start = System.nanoTime();
             int light[] = new int[val.length];
             int space = W;
             for (int i = 0; i < val.length; i++) {
@@ -98,8 +98,8 @@ class Knapsack {
                     wt[lightest(wt)] = 4000;
                 }
             }
-            long time = (System.currentTimeMillis() - start);
-            System.out.println("Tiempo transcurrido: "+time);
+            long time = (System.nanoTime() - start);
+            System.out.println("Tiempo transcurrido: "+time+" en nanosegundos");
             return W - space;
         }
         
@@ -119,7 +119,7 @@ class Knapsack {
         Random rand = new Random();
         for (int i = 0; i < arreglo.length; i++) {
             // Generar un número aleatorio entre 0 y 100 (puedes ajustar el rango según tus necesidades)
-            arreglo[i] = rand.nextInt(101); // Genera números entre 0 y 100
+            arreglo[i] = rand.nextInt(500); // Genera números entre 0 y 100
         }
     }
         
