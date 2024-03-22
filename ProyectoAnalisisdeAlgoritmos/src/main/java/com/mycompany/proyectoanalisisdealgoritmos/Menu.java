@@ -24,13 +24,20 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Problema del Conjunto Independiente (IS)");
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Algoritmo 1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        BotonViajante.setBackground(new java.awt.Color(153, 153, 153));
+        BotonViajante.setForeground(new java.awt.Color(0, 0, 0));
         BotonViajante.setText("Problema del Viajante (TSP)");
         BotonViajante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -38,6 +45,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        BotonAlgoritmo3.setBackground(new java.awt.Color(153, 153, 153));
+        BotonAlgoritmo3.setForeground(new java.awt.Color(0, 0, 0));
         BotonAlgoritmo3.setText("Algoritmo 2");
         BotonAlgoritmo3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,6 +54,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        BotonSalir.setBackground(new java.awt.Color(255, 102, 102));
         BotonSalir.setText("Salir");
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

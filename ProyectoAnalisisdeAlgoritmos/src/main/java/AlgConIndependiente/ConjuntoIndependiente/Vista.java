@@ -1,8 +1,13 @@
 package AlgConIndependiente.ConjuntoIndependiente;
 
+import com.mycompany.proyectoanalisisdealgoritmos.Menu;
+
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +38,17 @@ public class Vista extends javax.swing.JFrame {
     public static boolean MIncidencia[][] = new boolean[maxN][maxL];
     private String matrizAdyacente = "", matrizIncedencia = "", mostrarCI = "";
 
+    @Override
+    public void setDefaultCloseOperation(int operation) {
+        Menu menu = new Menu();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                menu.setVisible(true);
+            }
+        });
+    }
 
     public Vista() {
         initComponents();
@@ -406,6 +422,8 @@ public class Vista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIncidenciaActionPerformed
 
     private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
+        Menu menu = new Menu();
+        menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSalir1ActionPerformed
 

@@ -447,7 +447,7 @@ public class JFrameWindow extends javax.swing.JFrame {
             totalPermutations = permutations.size();
             for (int i = 0; i < permutations.size(); i++) {
                 String str = permutations.get(i);
-                str = initialCity + str;
+                str = initialCity + str + initialCity;
                 permutations.set(i, str);
             }
             processStage = "Evaluating routes (0/" + permutations.size() + ")";
