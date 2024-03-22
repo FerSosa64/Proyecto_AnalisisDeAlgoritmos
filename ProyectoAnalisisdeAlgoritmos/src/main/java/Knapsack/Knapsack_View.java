@@ -4,7 +4,11 @@
  */
 package Knapsack;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,11 +20,13 @@ public class Knapsack_View extends javax.swing.JFrame {
     /**
      * Creates new form Knapsack_View
      */
+    ArrayList<JLabel> objetos;
     JFrame father;
     public Knapsack_View(JFrame father) {
         initComponents();
         this.father = father;
         this.setLocationRelativeTo(null);
+        objetos = new ArrayList<>();
     }
 
     /**
@@ -33,7 +39,7 @@ public class Knapsack_View extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        ObjetosLayer = new javax.swing.JPanel();
         AddObjectButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         ObjectsTable = new javax.swing.JTable();
@@ -44,16 +50,16 @@ public class Knapsack_View extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1017, 557));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        ObjetosLayer.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout ObjetosLayerLayout = new javax.swing.GroupLayout(ObjetosLayer);
+        ObjetosLayer.setLayout(ObjetosLayerLayout);
+        ObjetosLayerLayout.setHorizontalGroup(
+            ObjetosLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 569, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ObjetosLayerLayout.setVerticalGroup(
+            ObjetosLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 437, Short.MAX_VALUE)
         );
 
@@ -117,7 +123,7 @@ public class Knapsack_View extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ObjetosLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -138,11 +144,11 @@ public class Knapsack_View extends javax.swing.JFrame {
                         .addComponent(AddObjectButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SackWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                         .addComponent(CalculateTime)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ExitButton))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ObjetosLayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -161,8 +167,23 @@ public class Knapsack_View extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddObjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddObjectButtonActionPerformed
+        Random r = new Random();
         DefaultTableModel modelo = (DefaultTableModel)ObjectsTable.getModel();      // TODO add your handling code here:
         modelo.setRowCount(modelo.getRowCount() + 1);
+        int peso = r.nextInt(20);
+        int valor = r.nextInt(500);
+        modelo.setValueAt(peso, modelo.getRowCount() - 1, 0);
+        modelo.setValueAt(valor, modelo.getRowCount() - 1, 1);
+        
+        JLabel labelTemporal = new JLabel();
+        labelTemporal.setText("Peso: "+peso+", Valor: "+valor);
+        objetos.add(labelTemporal);
+        ObjetosLayer.add(labelTemporal);
+        labelTemporal.setSize(300, 100);
+        labelTemporal.setLocation(r.nextInt(ObjetosLayer.getWidth() - labelTemporal.getWidth()),
+                r.nextInt(ObjetosLayer.getHeight() - labelTemporal.getHeight()));
+        labelTemporal.setForeground(Color.BLACK);
+        ObjetosLayer.validate();
     }//GEN-LAST:event_AddObjectButtonActionPerformed
 
     private void CalculateTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateTimeActionPerformed
@@ -230,9 +251,9 @@ public class Knapsack_View extends javax.swing.JFrame {
     private javax.swing.JButton CalculateTime;
     private javax.swing.JButton ExitButton;
     private javax.swing.JTable ObjectsTable;
+    private javax.swing.JPanel ObjetosLayer;
     private javax.swing.JTextField SackWeightField;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
