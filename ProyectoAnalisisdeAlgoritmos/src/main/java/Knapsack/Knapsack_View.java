@@ -22,11 +22,16 @@ public class Knapsack_View extends javax.swing.JFrame {
      */
     ArrayList<JLabel> objetos;
     JFrame father;
+    ArrayList<Integer> pesos;
+    ArrayList<Integer> valores;
+
     public Knapsack_View(JFrame father) {
         initComponents();
         this.father = father;
         this.setLocationRelativeTo(null);
         objetos = new ArrayList<>();
+        pesos = new ArrayList<Integer>();
+        valores = new ArrayList<Integer>();
     }
 
     /**
@@ -168,18 +173,21 @@ public class Knapsack_View extends javax.swing.JFrame {
 
     private void AddObjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddObjectButtonActionPerformed
         Random r = new Random();
-        DefaultTableModel modelo = (DefaultTableModel)ObjectsTable.getModel();      // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) ObjectsTable.getModel();      // TODO add your handling code here:
         modelo.setRowCount(modelo.getRowCount() + 1);
         int peso = r.nextInt(20);
-        int valor = r.nextInt(500);
+        pesos.add(peso);
+        Integer valor = r.nextInt(500);
+        valores.add(valor);
         modelo.setValueAt(peso, modelo.getRowCount() - 1, 0);
         modelo.setValueAt(valor, modelo.getRowCount() - 1, 1);
-        
+
         JLabel labelTemporal = new JLabel();
-        labelTemporal.setText("Peso: "+peso+", Valor: "+valor);
+        labelTemporal.setText("Peso: " + peso + ", Valor: " + valor);
         objetos.add(labelTemporal);
         ObjetosLayer.add(labelTemporal);
         labelTemporal.setSize(300, 100);
+        labelTemporal.setBackground(Color.GRAY);
         labelTemporal.setLocation(r.nextInt(ObjetosLayer.getWidth() - labelTemporal.getWidth()),
                 r.nextInt(ObjetosLayer.getHeight() - labelTemporal.getHeight()));
         labelTemporal.setForeground(Color.BLACK);
@@ -187,7 +195,10 @@ public class Knapsack_View extends javax.swing.JFrame {
     }//GEN-LAST:event_AddObjectButtonActionPerformed
 
     private void CalculateTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateTimeActionPerformed
-        // TODO add your handling code here:
+        int pesoMochila = Integer.parseInt(SackWeightField.getText());
+        Integer peso_array[] = (Integer[])pesos.toArray();
+        Integer valores_array[] = (Integer[])pesos.toArray();
+        knapSackLight(pesoMochila, peso_array, valores_array);
     }//GEN-LAST:event_CalculateTimeActionPerformed
 
     private void SackWeightFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SackWeightFieldFocusGained
@@ -246,6 +257,115 @@ public class Knapsack_View extends javax.swing.JFrame {
         });
     }
 
+    int max(int a, int b) {
+        return (a > b) ? a : b;
+    }
+
+    int knapSack(int W, Integer wt[], Integer val[], int n) {
+        // Base Case 
+        if (n == 0 || W == 0) {
+            return 0;
+        }
+
+        if (wt[n - 1] > W) {
+            return knapSack(W, wt, val, n - 1);
+        } else {
+            return max(val[n - 1] + knapSack(W - wt[n - 1], wt, val, n - 1), knapSack(W, wt, val, n - 1));
+        }
+    }
+
+    int knapSackBU(int W, Integer wt[], Integer val[], int n) {
+        int i, w;
+        int K[][] = new int[n + 1][W + 1];
+
+        for (i = 0; i <= n; i++) {
+            for (w = 0; w <= W; w++) {
+                if (i == 0 || w == 0) {
+                    K[i][w] = 0;
+                } else if (wt[i - 1] <= w) {
+                    K[i][w]
+                            = max(val[i - 1]
+                                    + K[i - 1][w - wt[i - 1]],
+                                    K[i - 1][w]);
+                } else {
+                    K[i][w] = K[i - 1][w];
+                }
+            }
+        }
+
+        return K[n][W];
+    }
+
+    int knapSackHeavy(int W, Integer wt[], Integer val[]) {
+        long start = System.nanoTime();
+        int heavy[] = new int[val.length];
+        int space = W;
+        for (int i = 0; i < val.length; i++) {
+            if (space < wt[heaviest(wt)]) {
+                wt[heaviest(wt)] = 0;
+            } else {
+                heavy[i] = val[heaviest(wt)];
+                space -= wt[heaviest(wt)];
+                wt[heaviest(wt)] = 0;
+            }
+        }
+        long time = (System.nanoTime() - start);
+        System.out.println("Tiempo transcurrido: " + time + " en nanosegundos");
+        return W - space;
+    }
+
+    int heaviest(Integer wt[]) {
+        int heavy = 0;
+        int index = 0;
+        for (int i = 0; i < wt.length; i++) {
+            if (wt[i] > heavy) {
+                heavy = wt[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    int knapSackLight(int W, Integer wt[], Integer val[]) {
+        long start = System.nanoTime();
+        int light[] = new int[val.length];
+        int space = W;
+        for (int i = 0; i < val.length; i++) {
+            if (space < wt[lightest(wt)]) {
+                wt[lightest(wt)] = 4000;
+            } else {
+                objetos.get(lightest(wt)).setVisible(false);
+                ObjetosLayer.revalidate();
+                light[i] = val[lightest(wt)];
+                space -= wt[lightest(wt)];
+                wt[lightest(wt)] = 4000;
+            }
+        }
+        long time = (System.nanoTime() - start);
+        System.out.println("Tiempo transcurrido: " + time + " en nanosegundos");
+        return W - space;
+    }
+
+    int lightest(Integer wt[]) {
+        int light = 3000;
+        int index = 0;
+        for (int i = 0; i < wt.length; i++) {
+            if (wt[i] < light) {
+                light = wt[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    public void llenarArreglo(int[] arreglo) {
+        Random rand = new Random();
+        for (int i = 0; i < arreglo.length; i++) {
+            // Generar un número aleatorio entre 0 y 100 (puedes ajustar el rango según tus necesidades)
+            arreglo[i] = rand.nextInt(500); // Genera números entre 0 y 100
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddObjectButton;
     private javax.swing.JButton CalculateTime;
