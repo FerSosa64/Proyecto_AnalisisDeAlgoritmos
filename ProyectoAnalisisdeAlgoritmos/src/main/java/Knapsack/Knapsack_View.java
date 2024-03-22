@@ -30,8 +30,8 @@ public class Knapsack_View extends javax.swing.JFrame {
         this.father = father;
         this.setLocationRelativeTo(null);
         objetos = new ArrayList<>();
-        pesos = new ArrayList<Integer>();
-        valores = new ArrayList<Integer>();
+        pesos = new ArrayList<>();
+        valores = new ArrayList<>();
     }
 
     /**
@@ -196,8 +196,10 @@ public class Knapsack_View extends javax.swing.JFrame {
 
     private void CalculateTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateTimeActionPerformed
         int pesoMochila = Integer.parseInt(SackWeightField.getText());
-        Integer peso_array[] = (Integer[])pesos.toArray();
-        Integer valores_array[] = (Integer[])pesos.toArray();
+        Integer peso_array[] = new Integer[pesos.size()];
+        peso_array = pesos.toArray(peso_array);
+        Integer valores_array[] = new Integer[valores.size()];
+        valores_array = valores.toArray(valores_array);
         knapSackLight(pesoMochila, peso_array, valores_array);
     }//GEN-LAST:event_CalculateTimeActionPerformed
 
